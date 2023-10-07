@@ -127,9 +127,10 @@ Prevent "updatedb" from indexing the snapshots, which would slow down the system
 
 	sudo sed -i '/# PRUNENAMES=/ a PRUNENAMES = ".snapshots"' /etc/updatedb.conf
 
-For XFCE:
+# Reconfigure lightdm to allow booting into read-only snapshots
+	sudo sed -i 's/^#user-authority-in-system-dir=false/user-authority-in-system-dir=true/' /etc/lightdm/lightdm.conf
 
-	sudo mount /dev/mapper/nvme0n1p4_crypt /mnt 
+	sudo reboot
 
 # Create read-only snapshots for XFCE
     sudo btrfs subvolume create /mnt/@var@lib@lightdm
