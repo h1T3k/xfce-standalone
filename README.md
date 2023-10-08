@@ -190,8 +190,8 @@ Enable the feature, update the GRUB image and reinstall in removable mode:
 	echo "GRUB_ENABLE_CRYPTODISK=y" | sudo tee -a /etc/default/grub
 	sudo update-grub
  
-	sudo grub-install /dev/nvme0n1 --force-extra-removable --no-nvram
-	sudo grub-install --target=x86_64-efi --efi-directory=/boot/efi --boot-directory=/boot --bootloader-id=GRUB --force-extra-removable --no-nvram
+	sudo grub-install /dev/nvme0n1 --force-extra-removable --no-nvram --uefi-secure-boot
+	sudo grub-install --target=x86_64-efi --efi-directory=/boot/efi --boot-directory=/boot --bootloader-id=GRUB --force-extra-removable --no-nvram --uefi-secure-boot
  
 	sudo cryptsetup luksDump /dev/nvme0n1p2 | grep -B1 "Iterations:"
 	#	Key Slot 0: ENABLED
@@ -213,13 +213,14 @@ Generate the shared secret (here with 512 bits of entropy as it’s also the siz
 	sudo mkdir -m0700 /etc/keys
 	bash
 	( umask 0077 && sudo dd if=/dev/urandom bs=1 count=64 of=/etc/keys/boot.key conv=excl,fsync )
-	#	64+0 records in
-	#	64+0 records out
-	#	64 bytes copied, 0.000698363 s, 91.6 kB/s
+	( umask 0077 && sudo dd if=/dev/urandom bs=1 count=64 of=/etc/keys/swap.key conv=excl,fsync )
+	( umask 0077 && sudo dd if=/dev/urandom bs=1 count=64 of=/etc/keys/root.key conv=excl,fsync )
 	zsh
 	sudo chmod u=rx,go-rwx /etc/keys
+	sudo chmod u=r,go-rwx /etc/keys/boot.key
+	sudo chmod u=r,go-rwx /etc/keys/swap.key
 	sudo chmod u=r,go-rwx /etc/keys/root.key
-Create a new key slot with that key file.
+Create new key slots with new key files.
 
 	sudo cryptsetup luksAddKey /dev/nvme0n1p2 /etc/keys/boot.key
 and add in the other voleumes too.
@@ -231,7 +232,7 @@ add these entries into the ccrypttab:
 	sudo sed -i "/^nvme0n1p2_crypt/c\nvme0n1p2_crypt UUID=$(sudo blkid -s UUID -o value /dev/nvme0n1p2) /etc/keys/boot.key luks,key-slot=1" /etc/crypttab
 	sudo sed -i "/^nvme0n1p3_crypt/c\nvme0n1p3_crypt UUID=$(sudo blkid -s UUID -o value /dev/nvme0n1p3) /etc/keys/swap.key luks,swap,discard,key-slot=1" /etc/crypttab
 	sudo sed -i "/^nvme0n1p4_crypt/c\nvme0n1p4_crypt UUID=$(sudo blkid -s UUID -o value /dev/nvme0n1p4) /etc/keys/root.key luks,discard,key-slot=1" /etc/crypttab
-make sure its all correct and comment out <#> the original entries with:
+make sure /etc/fstab is correct and comment out <#> the original entries with:
 
 	sudo nano /etc/crypttab - the mapper name for boot may change, so you may want to run lsblk to check it.
 	#
@@ -277,7 +278,7 @@ update grub
 	sudo update-grub
 and reboot for the changes to take affect:
 
-	sudo reboot now -f
+	sudo reboot
 # We're in....
  
 At this point I would open *snapper-gui*, make a new pre-boot snapshot for root, set it for 3 with name as NUMBER_LIMIT and count as 10.
