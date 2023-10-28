@@ -280,8 +280,12 @@ and reboot for the changes to take affect:
 
 	sudo reboot
 # We're in....
+
+Before we finish, in order for Kali to properly identify your newly formed partition and for the proper updates to take effect in the /etc/crypttab and /etc/fstab files, open the 'disks' gui via the application finder, select the boot partition and edit your password; first to something simple (like kali) and then back to a more secure one. once that change is complete, navigate to 'edit encryption options' and check the 'user options' radio button, then modify the password field to yours, and delete the 'nofail' option, recheck the radio button so that it reads the password and options from file.
  
 At this point I would open *snapper-gui*, make a new pre-boot snapshot for root, set it for 3 with name as NUMBER_LIMIT and count as 10.
+
+Reboot if you would like to make sure everything works as is. The extra space we allocated initially should make sure that any updates won't fill up the partition past the allotted space and make sure you can use this system for quite a long time!
 
 By the way, thanks for following along!
  
