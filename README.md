@@ -6,7 +6,7 @@ By doing so, one can completely bypass all of the issues and obstacles present s
 * the potential overwrite of important data, directories and partitions potentially leading to an irrecoverable loss during installation.
 * the overwrite of our host machine's efi partition resulting in an unbootable machine.
  
-Since I completed this on a MacBook Air (13-inch, Early 2015), I will assume you'll do the same, although I believe this would work on any EFI bootable machine as long as you remove the internal drive. I used an 500 GB pcie 3.2 as the installation medium, and a portable 256G NVME 4.0x4 Blade SSD for the target drive in place of the Apple M.2 SSD.
+Since I completed this on a MacBook Air (13-inch, Early 2015 model), I will assume you'll do the same, although I believe this would work on any EFI bootable machine as long as you remove the internal drive. I used an 500 GB pcie 3.2 as the installation medium, and a portable 256G NVME 4.0x4 Blade SSD for the target drive in place of the Apple M.2 SSD.
  
 I compiled this by sourcing through numerous different guides, blogs and reddit posts before I found a way that worked which once replicated has only really seemed to work this way which is probably due either memory constraints and a data bottleneck if using old hardware. Believe me it gets much more fast when wou plug an ssd directly into the board and install off of a usb 3.2+ via SATA. That is truly when the power of the Debian Installer is realized with Kali Linux. What I mainly used:
  
@@ -124,12 +124,9 @@ Prevent "updatedb" from indexing the snapshots, which would slow down the system
 
 # Reconfigure lightdm to allow booting into read-only snapshots
 	sudo sed -i 's/^#user-authority-in-system-dir=false/user-authority-in-system-dir=true/' /etc/lightdm/lightdm.conf
-	sudo reboot
+	sudo reboot now
 
-Save, exit, and reload.
- 
-	sudo systemctl daemon-reload
-	sudo reboot
+
 Archive the directory elsewhere (on another device), and unmount it afterwards.
  
 	sudo mount -oremount,ro /boot
@@ -276,11 +273,11 @@ and reboot for the changes to take affect:
 	sudo reboot
 # We're in....
 
-Before we finish, in order for Kali to properly identify your newly formed partition and for the proper updates to take effect in the /etc/crypttab and /etc/fstab files, open the 'disks' gui via the application finder, select the boot partition and edit your password; first to something simple (like kali) and then back to a more secure one. once that change is complete, navigate to 'edit encryption options' and check the 'user options' radio button, then modify the password field to yours, and delete the 'nofail' option, recheck the radio button so that it reads the password and options from file.
+Finally, open the 'disks' gui via the application finder, select the boot partition and change it's password; first to something simple (like kali) and then back to the more secure one. once that change is complete, navigate to 'edit encryption options' and check the 'user options' radio button, then modify the password field to yours, check 'unlock at boot' and delete the 'nofail' option.
  
-At this point I would open *snapper-gui*, make a new pre-boot snapshot for root, set it for 3 with name as NUMBER_LIMIT and count as 10.
+At this point I would open *snapper-gui*, make a new pre-boot configuration for root and drop the number of snapshots down to between 3 and 10 so as not to run out of space, unless you want to manually prune these as time goes on.
 
-Reboot if you would like to make sure everything works as is. The extra space we allocated initially should make sure that any updates won't fill up the partition past the allotted space and make sure you can use this system for quite a long time!
+The extra space we allocated initially should make sure that any updates won't fill up the boot partition past the allotted space, ensuring that you can use this system for quite a long time!
 
 By the way, thanks for following along!
  
