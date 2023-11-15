@@ -3,14 +3,12 @@
 The following will not work unless you have first removed your computer's internal drive and replace it with your own internal or external ssd, if you continue without having done so, you will overwrite your main OSs efi/bios partition and potentially your nvram data, likely leaving you with an unbootable machine and a trip to the technician....
  
 By doing so, one can completely bypass all of the issues and obstacles present such as:
-* the potential overwrite of important data, directories and partitions potentially leading to an irrecoverable loss.
-* the overwrite of our host machine's efi partition
-
-When booting external media, it seems that the main volume's efi partition is called on by default. Sure we could start off on a legacy bootable machine, manually adjusting things as we go on before we even complete the installation, however we can get exacactly what we want with one machine and a driver set.
+* the potential overwrite of important data, directories and partitions potentially leading to an irrecoverable loss during installation.
+* the overwrite of our host machine's efi partition resulting in an unbootable machine.
  
 Since I completed this on a MacBook Air (13-inch, Early 2015), I will assume you'll do the same, although I believe this would work on any EFI bootable machine as long as you remove the internal drive. I used an 500 GB pcie 3.2 as the installation medium, and a portable 256G NVME 4.0x4 Blade SSD for the target drive in place of the Apple M.2 SSD.
  
-I compiled this from about four or so different guides and read through numerous blog and reddit posts before I found a way that worked which once replicated has only really seemed to work this way which is probably due either memory constraints and a data bottleneck if using old hardware. Believe me it gets much more fast when wou plug an ssd directly into the board and install off of a usb 3.2+. That is truly when the power of the Debian Installer is realized with Kali Linux. What I mainly used:
+I compiled this by sourcing through numerous different guides, blogs and reddit posts before I found a way that worked which once replicated has only really seemed to work this way which is probably due either memory constraints and a data bottleneck if using old hardware. Believe me it gets much more fast when wou plug an ssd directly into the board and install off of a usb 3.2+ via SATA. That is truly when the power of the Debian Installer is realized with Kali Linux. What I mainly used:
  
 	https://www.kali.org/docs/installation/hard-disk-install/
 	https://www.kali.org/docs/installation/btrfs/
@@ -22,7 +20,7 @@ I compiled this from about four or so different guides and read through numerous
 	
 
  
-Lastly, while I uncovered a few ways to get this done I am going to assume that you are doing exactly as I did and so from here on out I will refer to our target drive as nvme0n1 and its partitions as nvme0n1p1, nvme0n1p2, nvme0n1p3/nvme0n1p3_crypt/luks-aaaa-aa-aa-aa-aaaaaa, nvme0n1p4_crypt and nvme0n1p5_crypt etc etc if I and when I do, so make sure to check your device ids etc before making any changes. Maybe copy ths file down and adjust it before you start.
+Lastly, while I uncovered a few ways to get this done I am going to assume that you are doing exactly as I did and so from here on out I will refer to our target drive as nvme0n1 and its partitions as nvme0n1p1, nvme0n1p2, nvme0n1p3/nvme0n1p3_crypt/luks-aaaa-aa-aa-aa-aaaaaa, nvme0n1p4_crypt and nvme0n1p5_crypt etc etc if I and when I do, so make sure to check your device ids etc before making any changes. Some machines will not recognize the drives as nvme0n1 and will register them as sdX unless mounted in an adapter. Maybe copy ths file down and adjust it before you start, checking your drives with lsblk via command line first.
  
 In Mac OS, power it down and carefully remove the internal drive. This will take care of /target/boot/efi being mounted to the wrong location.
  
@@ -74,20 +72,17 @@ Select:
 	manual partitioning.
  
 While gdisk is great, the installer's built in partition editor does a great job on it's own.
-* Select the free size and make a new one of a higher size, like 570 MB.
-Select the free size and create a new partition of 2 MB making sure to specify this as a reserved space for the bios grub bootloadder.
+* Select the free size and make a new one of a higher size, like 570 MB and use that partition for EFI.
 * Again, select free size, this time allocating at least 5G (6.9 GB in my case) and selecting ext4 as the filetype with /boot as the mount point and noatime as the option.
-create a new partition aligned to the end of the drive, at least double the size of the boot partition and select do not use.
-* Take note of that info and plan the largest partition out so that there is still a decent size left over (18GB+) for a backup location for your boot partition when we arrive there later during the installation.
-* Now select the remaining free space and allocate at least 16.9 GB swap however select 'physical volume for encryption'.
-* Select the remaining free space and allocate all but 16.9 GB so that we have a sizable portion alloted for a root partition and select 'physical volume for encryption'.
+* For your next partition, allocate at least 16.9 GB for swap space however select 'physical volume for encryption'.
+* Select the remaining free space and allocate the remainder for a root partition and select 'physical volume for encryption'.
 * At the top of the menu, select 'configure encrypted volumes'.
 * Select 'create encrypted volume'
 * Select the volumes you wish to encrypt, typically labeled with 'crypt'
 * Select 'Finish', answer yes when it prompts you to write changes to the disk and fill out the password fields.
-* There should now be two drives visible at the top of the partition editor display, one which is for root, select that and:
-* Select btrfs, '/' as the mount point, noatime as the option, format and finish.
-* Select the second drive and choose 'use as swap space', format and finish.
+* There should now be two drives visible at the top of the partition editor display, one which is for swap and the other for root, select that and:
+* Select 'use as', then choose 'seap' from the selections.
+* Select the second drive and choose 'btrfs', select 'options' and choose 'noatime' format and finish.
 * Lastly, choose 'finish partitioning and write changes to disk', then continue.
  
 Now choose:
