@@ -1,10 +1,11 @@
 
 # STANDALONE
-The following will not work unless you have first removed your computer's internal drive and replace it with your own internal or external ssd, if you continue without having done so, you will overwrite your main OSs efi/bios partition and potentially your nvram data, likely leaving you with an unbootable machine and a trip to the technician....
+The following will not work unless you have first removed your computer's internal drive and replace it with your own ssd, if you continue without having done so, you will overwrite your main OSs efi/bios partition, likely leaving you with an unbootable machine (unless you, like me, are done with MacOS), resulting in a trip to the technician....
  
-By doing so, one can completely bypass all of the issues and obstacles present such as:
-* the potential overwrite of important data, directories and partitions potentially leading to an irrecoverable loss during installation.
+When done correctly, one can completely bypass all of the issues and obstacles present such as:
+* the potential overwrite of important data, directories and partitions potentially leading to an irrecoverable loss during installation of Kali Linux.
 * the overwrite of our host machine's efi partition resulting in an unbootable machine.
+* having a naked bootloader which is highly susceptible to evil-maids attacks.
  
 Since I completed this on a MacBook Air (13-inch, Early 2015 model), I will assume you'll do the same, although I believe this would work on any EFI bootable machine as long as you remove the internal drive. I used an 500 GB pcie 3.2 as the installation medium, and a portable 256G NVME 4.0x4 Blade SSD for the target drive in place of the Apple M.2 SSD.
  
@@ -21,6 +22,8 @@ I compiled this by sourcing through numerous different guides, blogs and reddit 
 
  
 Lastly, while I uncovered a few ways to get this done I am going to assume that you are doing exactly as I did and so from here on out I will refer to our target drive as nvme0n1 and its partitions as nvme0n1p1, nvme0n1p2, nvme0n1p3/nvme0n1p3_crypt/luks-aaaa-aa-aa-aa-aaaaaa, nvme0n1p4_crypt and nvme0n1p5_crypt and so on, so make sure to check your device ids etc before making any changes. Some machines will not recognize the drives as nvme0n1 and will register them as sdX unless mounted in an adapter and the other way around in some cases. Copy this file down and adjust it before you start, checking your drives with lsblk via command line first.
+
+* for extra flavor and security, adjust this guide accordingly so that your EFI partition resides on a separate external thumb-drive so that you can remove the drive in order to mitigate retaliation on your bootloader mid-attack post-install.
  
 In Mac OS, power it down and carefully remove the internal drive. This will take care of /target/boot/efi being mounted to the wrong location.
  
