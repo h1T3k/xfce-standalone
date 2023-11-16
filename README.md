@@ -9,7 +9,7 @@ When done correctly, one can completely bypass all of the issues and obstacles p
  
 Since I completed this on a MacBook Air (13-inch, Early 2015 model), I will assume you'll do the same, although I believe this would work on any EFI bootable machine (I know this works on late 2015 iMacs too) as long as you remove the internal drive. I used a 500 GB pcie 3.2 as the installation medium, and a portable 256G NVME 4.0x4 Blade SSD for the target drive in place of the Apple M.2 SSD.
  
-I compiled this by sourcing through numerous different guides, blogs and reddit posts before I found a way that worked which once replicated has only really seemed to work this way which is probably due either memory constraints and a data bottleneck if using old hardware. Believe me it gets much more fast when wou plug an ssd directly into the board and install off of a usb 3.2+ via SATA. That is truly when the power of the Debian Installer is realized with Kali Linux. What I mainly used:
+I compiled this by sourcing through numerous different guides, blogs and reddit posts before I found a way that worked which once replicated has only really seemed to work this way which is probably due either memory constraints and a data bottleneck if using old hardware. Believe me it gets much more fast when wou plug an ssd directly into the board and install off of a usb 3.2+ via SATA. This is truly when the power of the Debian Installer is realized with Kali Linux. So, what I mainly used:
  
 	https://www.kali.org/docs/installation/hard-disk-install/
 	https://www.kali.org/docs/installation/btrfs/
