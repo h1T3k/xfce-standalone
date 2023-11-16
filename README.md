@@ -269,9 +269,9 @@ and reboot for the changes to take affect:
 	sudo reboot now
 # We're in....
 
-Finally, open the 'disks' gui via the application finder, select the boot partition and change it's password; first to something simple (like kali) and then back to the more secure one. once that change is complete, navigate to 'edit encryption options' and check the 'user options' radio button, then modify the password field to yours, check 'unlock at boot' and delete the 'nofail' option.
+Finally, open the 'disks' gui via the application finder (command then 'diaks' then hit 'enter'), select the unlocked boot partition, click the gear icon in the tab below and 'change passphrase'; change it's password first to something simple (like kalima) and then back to the more secure one (kalimaa, although realistically a far more complicated one will be much more secure, and should be your choice). Once complete, click the gear again and select 'edit encryption options' from the drop-down-menu then check the 'user session defaults' radio button and click 'ok' in the lower right-hand side of the pane. Click the gear wheel again, followed once more by 'edit encryption options' and uncheck the 'user session default's radio button. Delete the 'nofail' option and leave that field blank. Modify the password field to yours and click 'ok' in the lower right-hand side of the pane.
  
-At this point I would open *snapper-gui*, make a new pre-boot configuration for root and drop the number of snapshots down to between 3 and 10 so as not to run out of space, unless you want to manually prune these as time goes on.
+At this point I would open *snapper-gui* and click the disk icon in the top left, lowering the amount of snapshots to create so it is more manageable space-wise. Make a new pre-boot configuration for root and create a new 'pre-boot' root (/) snapshot with 'number' as the cleanup option, NUMBER_LIMIT in the name field below, with '3' as it's value. Hit 'ok' and you're ready to fully update the system, kernel, etc!
 
 The extra space we allocated initially should make sure that any updates won't fill up the boot partition past the allotted space, ensuring that you can use this system for quite a long time!
 
