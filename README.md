@@ -266,7 +266,7 @@ update grub
 	sudo update-grub
 and reboot for the changes to take affect:
 
-	sudo reboot
+	sudo reboot now
 # We're in....
 
 Finally, open the 'disks' gui via the application finder, select the boot partition and change it's password; first to something simple (like kali) and then back to the more secure one. once that change is complete, navigate to 'edit encryption options' and check the 'user options' radio button, then modify the password field to yours, check 'unlock at boot' and delete the 'nofail' option.
