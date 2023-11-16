@@ -5,7 +5,7 @@ The following will not work unless you have first removed your computer's intern
 When done correctly, one can completely bypass all of the issues and obstacles present such as:
 * the potential overwrite of important data, directories and partitions potentially leading to an irrecoverable loss during installation of Kali Linux.
 * the overwrite of our host machine's efi partition resulting in an unbootable machine.
-* having a naked bootloader which is highly susceptible to evil-maids attacks.
+* having a naked bootloader which is highly susceptible to evil-maid/-bootloader attacks.
  
 Since I completed this on a MacBook Air (13-inch, Early 2015 model), I will assume you'll do the same, although I believe this would work on any EFI bootable machine as long as you remove the internal drive. I used an 500 GB pcie 3.2 as the installation medium, and a portable 256G NVME 4.0x4 Blade SSD for the target drive in place of the Apple M.2 SSD.
  
