@@ -20,7 +20,7 @@ I compiled this by sourcing through numerous different guides, blogs and reddit 
 	
 
  
-Lastly, while I uncovered a few ways to get this done I am going to assume that you are doing exactly as I did and so from here on out I will refer to our target drive as nvme0n1 and its partitions as nvme0n1p1, nvme0n1p2, nvme0n1p3/nvme0n1p3_crypt/luks-aaaa-aa-aa-aa-aaaaaa, nvme0n1p4_crypt and nvme0n1p5_crypt etc etc if I and when I do, so make sure to check your device ids etc before making any changes. Some machines will not recognize the drives as nvme0n1 and will register them as sdX unless mounted in an adapter. Maybe copy ths file down and adjust it before you start, checking your drives with lsblk via command line first.
+Lastly, while I uncovered a few ways to get this done I am going to assume that you are doing exactly as I did and so from here on out I will refer to our target drive as nvme0n1 and its partitions as nvme0n1p1, nvme0n1p2, nvme0n1p3/nvme0n1p3_crypt/luks-aaaa-aa-aa-aa-aaaaaa, nvme0n1p4_crypt and nvme0n1p5_crypt and so on, so make sure to check your device ids etc before making any changes. Some machines will not recognize the drives as nvme0n1 and will register them as sdX unless mounted in an adapter and the other way around in some cases. Copy this file down and adjust it before you start, checking your drives with lsblk via command line first.
  
 In Mac OS, power it down and carefully remove the internal drive. This will take care of /target/boot/efi being mounted to the wrong location.
  
@@ -97,7 +97,7 @@ and continue.
 	Install Grub boot loader and select yes when asked if you want to force efi to the removable path. 
 DO NOT allow it to change your NVRAM settings; I REPEAT: DO NOT ALLOW IT TO CHANGE YOUR NVRAM SETTINGS!
 
-Don't install os-prober (if you've followed along this is the only OS present, we'll do it later anyways)
+Don't install os-prober.
  
 Finish with defaults.
  
