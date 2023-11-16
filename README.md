@@ -249,10 +249,6 @@ like so:
 	/dev/mapper/nvme0n1p4_crypt	/usr/local	btrfs	defaults,noatime,ssd,compress=lzo,subvol=@usr@local	0	0
 	/dev/mapper/nvme0n1p4_crypt	/var/log	btrfs	defaults,noatime,ssd,compress=lzo,subvol=@var@log	0	0
 	/dev/mapper/nvme0n1p3_crypt	none		swap	sw							0	0
-	# /var/lib/gdm3*lightdm was on /dev/mapper/nvme0n1p4_crypt during installation
-	UUID=<uuid>	/var/lib/gdm3*lightdm	btrfs	defaults,subvol=@var@lib@gdm3		0	0
-	# /var/lib/AccountsService was on /dev/mapper/nvme0n1p4_crypt during installation
-	UUID=<uuid>	/var/lib/AccountsService	btrfs	defaults,subvol=@var@lib@AccountsService	0	0 
 when done editing save your work, exit the editor then run:
 
 	sudo systemctl daemon-reload
