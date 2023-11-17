@@ -1,5 +1,5 @@
 
-# STANDALONE
+#Kali: FULLY LOADED - XFCE
 The following will not work unless you have first removed your computer's internal drive and replace it with your own ssd, if you continue without having done so, you will overwrite your main OSs efi/bios partition, likely leaving you with an unbootable machine (unless you, like me, are done with MacOS), resulting in a trip to the technician....
  
 When done correctly, one can completely bypass all of the issues and obstacles present such as:
@@ -27,7 +27,7 @@ Lastly, while I uncovered a few ways to get this done I am going to assume that 
  
 In Mac OS, power it down and carefully remove the internal drive. This will take care of /target/boot/efi being mounted to the wrong location.
  
-Replace the internal drive with the new SSD we are using as our /target. Plug back in the power cable, our Kali installer USB and reboot our computer from the image.
+Replace the internal drive with the new SSD we are using as our /target. Plug back in the power cable, our Kali installer USB->SATA 3.2, and reboot our computer from the image.
  
 Continue by selecting "Advanced Options" and then selecting "graphical expert installation guide.."
  
