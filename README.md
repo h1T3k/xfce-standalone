@@ -288,7 +288,17 @@ To erase the zsh history, use:
 echo > ~/.zsh_history
 
 
-After running these commands, you may also want to exit the terminal session to ensure the erasure takes effect.
+Exit the terminal session to ensure the erasure takes effect.
+
+Now, in order to move this from the nvme to a USB drive, recreate the partition scheme on the target drive so it matches the source. Using the same installer ensures they will match in both alignment and block size. R boot into another machine, insert our source then target drives and run the following commands, cloning the partitions individually:
+
+
+sudo ddrescue /dev/sdc1 /dev/sdd1 --force rescue-1.log
+sudo ddrescue /dev/sdc2 /dev/sdd2 --force rescue-2.log
+sudo ddrescue /dev/sdc3 /dev/sdd3 --force rescue-3.log
+sudo ddrescue /dev/sdc4 /dev/sdd4 --force rescue-4.log
+
+You will be left with a fully encrypted and universally bootable copy of Kali Linux on a USB drive!
 
 
 By the way, thanks for following along!
