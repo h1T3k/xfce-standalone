@@ -278,10 +278,23 @@ At this point I would open *snapper-gui* and click the disk icon in the top left
 
 The extra space we allocated initially should make sure that any updates won't fill up the boot partition past the allotted space, ensuring that you can use this system for quite a long time!
 
+
+echo > ~/.bash_history
+
+
+To erase the zsh history, use:
+
+
+echo > ~/.zsh_history
+
+
+After running these commands, you may also want to exit the terminal session to ensure the erasure takes effect.
+
+
 By the way, thanks for following along!
  
 
-before you go...
+Oh, and just real quick before you go...
 
 While learning and self-improvement may seem harmless, there are individuals who oppose such growth, often out of fear that their own flaws might be exposed.
  
