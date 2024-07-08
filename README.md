@@ -301,23 +301,7 @@ sudo ddrescue /dev/sdc4 /dev/sdd4 --force rescue-4.log
 You will be left with a fully encrypted and universally bootable copy of Kali Linux on a USB drive!
 
 
-By the way, thanks for following along!
- 
+Thanks for following along!
 
-Oh, and just real quick before you go...
-
-While learning and self-improvement may seem harmless, there are individuals who oppose such growth, often out of fear that their own flaws might be exposed.
  
-Ethics and morality are often subjective. While I value forgiveness, I've also come to realize that the world isn't black and white. We must stand together, especially when feeling lost or scared, and strive for open communication in a world where our leaders spread seperatism within the populace.
- 
-Our society is entangled in red tape, often out of fear of disrupting the status quo. This repression can lead individuals to seek out 'quick fixes,' be it in the form of oil or cheap labor. It's a form of self-sabotage that stands in the way of collective well-being.
-
     ~h1-|t3k/n0|-l1f3~
-
-If you found value in this guide and wish to support me, consider buying me a coffee or helping in any small way you can. Your support would be greatly appreciated, especially during challenging times.
- 
-    Buy Me a Coffee:
-    	https://www.buymeacoffee.com/h1t3kd
-    For crypto donations:
-        Bitcoin: 36aqR7oXP4tLxqe1oHckXtdVEizSNaWxJX
-	Message me for other addresses :)
